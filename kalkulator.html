@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Kalkuilator Ujang Emen</title>
+  <style>
+	  .box{
+		position: fixed;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+	}
+	
+	input{
+		width: 100%;
+		padding: 12px 20px;
+		margin: 8px 0;
+		box-sizing: border-box;
+	}
+	.grid-container {
+		display: grid;
+		grid-template-columns: auto auto auto auto;
+		grid-gap: 20px 20px;
+	}
+	button{
+  		background:#2C97DF;
+		color:white;
+  		border-top:0;
+  		border-left:0;
+  		border-right:0;
+  		border-bottom:5px solid #2A80B9;
+  		padding:10px 20px;
+  		text-decoration:none;
+  		font-family:sans-serif;
+  		font-size:11pt;
+	}
+
+  </style>
+</head>
+<body>
+ <div class = "box">
+	<input type="number" step = 0.01 id = "hasil" placeholder = "hasil" width="100%" height="100"/>
+		<div class = "grid-container">
+			<button type="button" onclick = "klik_input(1)">1</buton>
+			<button type="button" onclick = "klik_input(2)">2</buton>
+			<button type="button" onclick = "klik_input(3)">3</buton>
+			<button type="button" onclick = "klik_input(4)">4</buton>
+			<button type="button" onclick = "klik_input(5)">5</buton>
+			<button type="button" onclick = "klik_input(6)">6</buton>
+			<button type="button" onclick = "klik_input(7)">7</buton>
+			<button type="button" onclick = "klik_input(8)">8</buton>
+			<button type="button" onclick = "klik_input(9)">9</buton>
+			<button type="button" onclick = "klik_input(0)">0</buton>
+			<button type="button" onclick = "klik_opr(1)">+</buton>
+			<button type="button" onclick = "klik_opr(2)">-</buton>
+			<button type="button" onclick = "klik_opr(3)">&#8727;</buton>
+			<button type="button" onclick = "klik_opr(4)">/</buton>
+			<button type="button" onclick = "klik_opr(5)">^</buton>
+			<button type="button" onclick = "klik_akar()">&#8730;</buton>
+			<button type="button" onclick = "klik_C()">&#10633;</buton>
+			<button type="button" onclick = "klik_opr(6)">&#8731;</buton>
+			<button type="button" onclick = "klik_hasil()">=</buton>
+			<button type="button" onclick = "about()">?</buton>
+		</div>
+	</div>
+</body>
+<script>
+let operator = 0;
+let nilai1 = 0;
+let nilai2 = 0;
+
+	function klik_input(x){
+		let	n =	document.getElementById('hasil').value;
+		n += x;
+		let y = parseFloat(n);
+		document.getElementById('hasil').value = y;
+	}
+
+	function klik_opr(opr){
+		nilai1 = parseFloat(document.getElementById('hasil').value);
+		operator = parseInt(opr);
+		document.getElementById('hasil').value = "";
+	}
+	function klik_hasil(){
+		nilai2 = parseFloat(document.getElementById('hasil').value);
+		let hasil = 0 ;
+		switch(operator){
+			case 1: //tambah
+				hasil = nilai1 + nilai2;
+				break;
+			case 2: //kurang
+				hasil = nilai1 - nilai2;
+				break;	
+			case 3: //kali
+				hasil = nilai1 * nilai2;
+				break;	
+			case 4: //bagi
+				hasil = nilai1 / nilai2;
+				break;
+			case 5: //pangkat
+				hasil = nilai1 ** nilai2;
+				break;	
+			case 6: //root
+				hasil = Math.pow(nilai1,1/nilai2);
+				break;	
+			default:
+			
+			}
+		document.getElementById('hasil').value = hasil;		
+	}
+	
+	function klik_C(){
+		var text = document.getElementById('hasil').value;
+		var panjang = text.length;
+		var hasil = 0;
+		if(panjang!=0){
+			hasil = text.slice(0, panjang-1);
+		}
+		document.getElementById('hasil').value = hasil;
+	}
+	function klik_akar(){
+		var text = document.getElementById('hasil').value;
+		hasil = Math.sqrt(parseFloat(text));
+		document.getElementById('hasil').value = hasil;
+	}
+	function about(){
+		alert("Aplikasi Kalkulator dengan JavaScript By SMK Adz-Dzikro");
+	}
+</script>
+</html>
